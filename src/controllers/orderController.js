@@ -1,5 +1,10 @@
-exports.getOrders = (req, res) => {
-  res.json({ message: "Lista ordini (stub)" });
+exports.getOrders = async (req, res, next) => {
+  try {
+    // Temporaneamente restituiamo un array vuoto
+    res.json([]);
+  } catch (error) {
+    next(error);
+  }
 };
 
 exports.createOrder = (req, res) => {
