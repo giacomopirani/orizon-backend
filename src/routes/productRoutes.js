@@ -20,7 +20,6 @@ const productController = require("../controllers/productController");
  *             properties:
  *               name:
  *                 type: string
- *                 description: Il nome del prodotto
  *     responses:
  *       201:
  *         description: Prodotto creato con successo.
@@ -48,6 +47,29 @@ router.post(
   },
   productController.createProduct
 );
+
+/**
+ * @swagger
+ * /products:
+ *   get:
+ *     summary: Recupera tutti i prodotti
+ *     description: Restituisce una lista di tutti i prodotti.
+ *     responses:
+ *       200:
+ *         description: Lista dei prodotti recuperata con successo.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   name:
+ *                     type: string
+ */
+router.get("/", productController.getAllProducts);
 
 /**
  * @swagger

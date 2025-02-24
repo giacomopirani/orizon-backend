@@ -39,3 +39,12 @@ exports.deleteProduct = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.getAllProducts = async (req, res, next) => {
+  try {
+    const products = await productModel.getAllProducts();
+    res.json(products);
+  } catch (error) {
+    next(error);
+  }
+};

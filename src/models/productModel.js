@@ -24,4 +24,10 @@ module.exports = {
     const [result] = await pool.execute(query, [id]);
     return result.affectedRows;
   },
+
+  async getAllProducts() {
+    const query = "SELECT * FROM products";
+    const [rows] = await pool.execute(query);
+    return rows;
+  },
 };

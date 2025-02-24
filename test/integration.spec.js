@@ -20,7 +20,7 @@ describe("Integration Tests", () => {
     it("dovrebbe restituire una lista di ordini", async () => {
       const res = await request(app).get("/orders");
 
-      // Se non ci sono ordini ancora creati, potresti ottenere un array vuoto
+      // If there are no orders yet created, you may get an empty array
       expect(res.status).to.equal(200);
       expect(res.body).to.be.an("array");
     });
