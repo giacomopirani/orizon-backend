@@ -22,8 +22,7 @@ exports.createOrder = async (req, res, next) => {
       userIds.length === 0
     ) {
       return res.status(400).json({
-        error:
-          "productIds e userIds devono essere array non vuoti e obbligatori",
+        error: "productIds and userIds must be non-empty and required arrays",
       });
     }
     const orderId = await orderModel.createOrder({ productIds, userIds });
@@ -34,9 +33,9 @@ exports.createOrder = async (req, res, next) => {
 };
 
 exports.updateOrder = (req, res) => {
-  res.json({ message: "Ordine aggiornato" });
+  res.json({ message: "Order updated (state)" });
 };
 
 exports.deleteOrder = (req, res) => {
-  res.json({ message: "Ordine eliminato" });
+  res.json({ message: "Order deleted (state)" });
 };
