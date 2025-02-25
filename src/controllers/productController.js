@@ -4,7 +4,7 @@ exports.createProduct = async (req, res, next) => {
   try {
     const { name } = req.body;
     if (!name) {
-      return res.status(400).json({ error: "Il campo name è obbligatorio" });
+      return res.status(400).json({ error: "The name field is mandatory" });
     }
     const productId = await productModel.createProduct(name);
     res.status(201).json({ id: productId, name });
@@ -19,9 +19,9 @@ exports.updateProduct = async (req, res, next) => {
     const { id } = req.params;
     const affectedRows = await productModel.updateProduct(id, name);
     if (affectedRows === 0) {
-      return res.status(404).json({ error: "Prodotto non trovato" });
+      return res.status(404).json({ error: "Product not found" });
     }
-    res.json({ message: "Prodotto aggiornato correttamente" });
+    res.json({ message: "Product updated correctly" });
   } catch (error) {
     next(error);
   }
@@ -32,9 +32,9 @@ exports.deleteProduct = async (req, res, next) => {
     const { id } = req.params;
     const affectedRows = await productModel.deleteProduct(id);
     if (affectedRows === 0) {
-      return res.status(404).json({ error: "Prodotto non trovato" });
+      return res.status(404).json({ error: "Product not found" });
     }
-    res.json({ message: "Prodotto eliminato correttamente" });
+    res.json({ message: "Product deleted correctly" });
   } catch (error) {
     next(error);
   }

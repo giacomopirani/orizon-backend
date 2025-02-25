@@ -7,7 +7,7 @@ exports.createUser = async (req, res, next) => {
     if (!nome || !cognome || !email) {
       return res
         .status(400)
-        .json({ error: "Nome, cognome e email sono obbligatori" });
+        .json({ error: "First name, surname and email are mandatory" });
     }
     const userId = await userModel.createUser({ nome, cognome, email });
     // Returns the answer with "id" property included
@@ -18,11 +18,11 @@ exports.createUser = async (req, res, next) => {
 };
 
 exports.updateUser = (req, res) => {
-  res.json({ message: "User aggiornato" });
+  res.json({ message: "User up to date" });
 };
 
 exports.deleteUser = (req, res) => {
-  res.json({ message: "User eliminato" });
+  res.json({ message: "User deleted" });
 };
 
 exports.getAllUsers = async (req, res, next) => {
