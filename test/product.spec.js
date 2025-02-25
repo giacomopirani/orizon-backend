@@ -8,19 +8,19 @@ describe("Product Controller", () => {
     let req, res, next;
 
     beforeEach(() => {
-      // Simuliamo una richiesta con il body corretto
-      req = { body: { name: "Viaggio a Bali" } };
-      // Simuliamo la risposta (usiamo stub per status e json)
+      // We simulate a request with the correct bodysuit
+      req = { body: { name: "Trip to Bali" } };
+      // We simulate the answer (use stub for status and json)
       res = {
         status: sinon.stub().returnsThis(),
         json: sinon.stub(),
       };
-      // Funzione next per passare gli errori
+      // Next function to pass errors
       next = sinon.stub();
     });
 
-    it("dovrebbe creare un prodotto e restituire status 201", async () => {
-      // Stub per evitare di eseguire la logica reale del modello
+    it("should create a product and return status 201", async () => {
+      // Stub to avoid running the real logic of the model
       const createStub = sinon
         .stub(productModel, "createProduct")
         .resolves(123);
@@ -29,21 +29,19 @@ describe("Product Controller", () => {
 
       expect(createStub.calledOnce).to.be.true;
       expect(res.status.calledWith(201)).to.be.true;
-      expect(res.json.calledWith({ id: 123, name: "Viaggio a Bali" })).to.be
-        .true;
+      expect(res.json.calledWith({ id: 123, name: "Trip to Bali" })).to.be.true;
 
-      // Ripristina lo stub
+      // Restore the stub
       createStub.restore();
     });
 
-    it("dovrebbe restituire status 400 se manca il campo name", async () => {
-      req.body = {}; // Nessun campo name
+    it("should return status 400 if name field is missing", async () => {
+      req.body = {}; // No field name
       await productController.createProduct(req, res, next);
 
       expect(res.status.calledWith(400)).to.be.true;
-      expect(
-        res.json.calledWithMatch({ error: "Il campo name è obbligatorio" })
-      ).to.be.true;
+      expect(res.json.calledWithMatch({ error: "The name field is mandatory" }))
+        .to.be.true;
     });
   });
 });
