@@ -7,12 +7,12 @@ const options = {
     info: {
       title: "Orizon API",
       version: "1.0.0",
-      description: "Documentazione delle API per il progetto Orizon",
+      description: "Orizon API documentation",
     },
     servers: [
       {
         url: "http://localhost:3000",
-        description: "Server di sviluppo",
+        description: "Development server",
       },
     ],
   },
