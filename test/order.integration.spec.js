@@ -3,7 +3,7 @@ const { expect } = require("chai");
 const app = require("../src/app");
 
 describe("Order Integration Tests", () => {
-  it("dovrebbe creare un nuovo ordine e restituire 201", async () => {
+  it("should create a new order and return 201", async () => {
     // Make sure you have at least one product and user in the database before running this test
     const res = await request(app)
       .post("/orders")
@@ -18,7 +18,7 @@ describe("Order Integration Tests", () => {
     expect(res.body.productIds).to.be.an("array");
   });
 
-  it("dovrebbe restituire 200 e una lista di ordini", async () => {
+  it("should return 200 and a list of orders", async () => {
     const res = await request(app).get("/orders");
     expect(res.status).to.equal(200);
     expect(res.body).to.be.an("array");
