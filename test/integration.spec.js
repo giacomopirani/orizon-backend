@@ -4,20 +4,20 @@ const app = require("../src/app");
 
 describe("Integration Tests", () => {
   describe("POST /products", () => {
-    it("dovrebbe creare un nuovo prodotto e restituire 201", async () => {
+    it("should create a new product and return 201", async () => {
       const res = await request(app)
         .post("/products")
         .set("Content-Type", "application/json")
-        .send({ name: "Viaggio a Bali" });
+        .send({ name: "Trip to Bali" });
 
       expect(res.status).to.equal(201);
       expect(res.body).to.have.property("id");
-      expect(res.body.name).to.equal("Viaggio a Bali");
+      expect(res.body.name).to.equal("Trip to Bali");
     });
   });
 
   describe("GET /orders", () => {
-    it("dovrebbe restituire una lista di ordini", async () => {
+    it("should return a list of orders", async () => {
       const res = await request(app).get("/orders");
 
       // If there are no orders yet created, you may get an empty array
