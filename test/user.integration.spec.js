@@ -3,7 +3,7 @@ const { expect } = require("chai");
 const app = require("../src/app");
 
 describe("User Integration Tests", () => {
-  it("dovrebbe creare un nuovo utente e restituire 201", async () => {
+  it("should create a new user and return 201", async () => {
     const uniqueEmail = `luca.bianchi+${Date.now()}@example.com`;
     const res = await request(app)
       .post("/users")
@@ -19,7 +19,7 @@ describe("User Integration Tests", () => {
     expect(res.body.nome).to.equal("Luca");
   });
 
-  it("dovrebbe restituire 400 se mancano dati obbligatori", async () => {
+  it("should return 400 if mandatory data is missing", async () => {
     // We send an incomplete payload, for example only "name" is present.
     const res = await request(app)
       .post("/users")
