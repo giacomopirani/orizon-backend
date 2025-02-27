@@ -126,6 +126,7 @@ router.delete("/:id", userController.deleteUser);
  *                   email:
  *                     type: string
  */
+
 router.get("/", userController.getAllUsers);
 
 module.exports = router;

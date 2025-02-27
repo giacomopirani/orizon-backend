@@ -25,17 +25,21 @@ module.exports = {
     return orderId;
   },
 
-  async getFilteredOrders({ date, productId }) {
+  async getFilteredOrders({ date, productId, page, limit }) {
+    page = parseInt(page, 10) || 1;
+    limit = parseInt(limit, 10) || 10;
+    const offset = (page - 1) * limit;
+
     let query = `
-      SELECT o.id AS order_id, o.created_at,
-             GROUP_CONCAT(DISTINCT p.name) AS products,
-             GROUP_CONCAT(DISTINCT CONCAT(u.nome, ' ', u.cognome)) AS users
-      FROM orders o
-      LEFT JOIN order_products op ON o.id = op.order_id
-      LEFT JOIN products p ON p.id = op.product_id
-      LEFT JOIN order_users ou ON o.id = ou.order_id
-      LEFT JOIN users u ON u.id = ou.user_id
-    `;
+    SELECT o.id AS order_id, o.created_at,
+           GROUP_CONCAT(DISTINCT p.name) AS products,
+           GROUP_CONCAT(DISTINCT CONCAT(u.nome, ' ', u.cognome)) AS users
+    FROM orders o
+    LEFT JOIN order_products op ON o.id = op.order_id
+    LEFT JOIN products p ON p.id = op.product_id
+    LEFT JOIN order_users ou ON o.id = ou.order_id
+    LEFT JOIN users u ON u.id = ou.user_id
+  `;
 
     const whereClauses = [];
     const params = [];
@@ -53,10 +57,10 @@ module.exports = {
       query += " WHERE " + whereClauses.join(" AND ");
     }
 
-    query += `
-      GROUP BY o.id
-      ORDER BY o.created_at DESC
-    `;
+    query += ` GROUP BY o.id ORDER BY o.created_at DESC LIMIT ${limit} OFFSET ${offset}`;
+
+    console.log("SQL Query:", query);
+    console.log("Parameters:", params);
 
     const [rows] = await pool.execute(query, params);
     return rows;
